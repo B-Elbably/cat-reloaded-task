@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1 Edit Member
+  form#editForm(data-id=`${member._id}`)
+    label Name
+    input(type="text" name="name" value=member.name required)
+
+    label Email
+    input(type="email" name="email" value=member.email required)
+
+    label Sub-circle
+    select(name="subcircle" required)
+      each sc in subcircles
+        option(value=sc selected=(member.subcircle === sc))= sc
+
+    label Level
+    select(name="level" required)
+      each lv in levels
+        option(value=lv selected=(member.level === lv))= lv
+
+    button(type="submit") Save Changes
+    a.btn-cancel(href="/members") Cancel

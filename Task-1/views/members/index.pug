@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  h1 Members Dashboard
+  span.count #{members.length} members found
+
+  form.filters(action="/members" method="GET")
+    input(type="text" name="name" placeholder="Search by name..." value=filters.name)
+    select(name="subcircle")
+      option(value="") All Sub-circles
+      each sc in subcircles
+        option(value=sc selected=(filters.subcircle === sc))= sc
+    select(name="level")
+      option(value="") All Levels
+      each lv in levels
+        option(value=lv selected=(filters.level === lv))= lv
+    button(type="submit") Filter
+    if filters.name || filters.subcircle || filters.level
+      a.btn-clear(href="/members") Clear
+
+  if members.length
+    table
+      thead
+        tr
+          th Name
+          th Email
+          th Sub-circle
+          th Level
+          th Actions
+      tbody
+        each m in members
+          tr
+            td= m.name
+            td= m.email
+            td= m.subcircle
+            td= m.level
+            td.actions
+              a.btn-edit(href=`/members/${m._id}/edit`) Edit
+              button.btn-delete(data-id=`${m._id}` onclick="deleteMember(this)") Delete
+  else
+    p No members found.
