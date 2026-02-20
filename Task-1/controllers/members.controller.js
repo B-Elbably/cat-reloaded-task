@@ -28,10 +28,6 @@ exports.getAllMembers = async (req, res, next) => {
     }
 };
 
-exports.addMemberForm = (req, res) => {
-    res.render('members/add', { title: 'Add Member', subcircles, levels });
-};
-
 exports.createMember = async (req, res, next) => {
     try {
         await Member.create(req.body);

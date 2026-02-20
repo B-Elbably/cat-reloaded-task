@@ -2,8 +2,26 @@ extends ../layout
 
 block content
   h1 Members Dashboard
-  span.count #{members.length} members found
 
+  //- Add Member Form
+  h2 Add New Member
+  form.add-form(action="/members" method="POST")
+    input(type="text" name="name" placeholder="Name" required)
+    input(type="email" name="email" placeholder="Email" required)
+    select(name="subcircle" required)
+      option(value="") -- Sub-circle --
+      each sc in subcircles
+        option(value=sc)= sc
+    select(name="level" required)
+      option(value="") -- Level --
+      each lv in levels
+        option(value=lv)= lv
+    button(type="submit") Add Member
+
+  hr
+
+  //- Filters
+  span.count #{members.length} members found
   form.filters(action="/members" method="GET")
     input(type="text" name="name" placeholder="Search by name..." value=filters.name)
     select(name="subcircle")

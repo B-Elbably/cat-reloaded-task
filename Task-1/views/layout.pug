@@ -8,21 +8,17 @@ html(lang="en")
   body
     nav
       a(href="/members") Members Dashboard
-      a(href="/members/add") + Add Member
     .container
       block content
     script.
       async function deleteMember(btn) {
-        console.log('Delete clicked', btn.dataset.id);
         if (!confirm('Delete this member?')) return;
         const id = btn.dataset.id;
         try {
           const res = await fetch('/members/' + id, { method: 'DELETE' });
-          console.log('Delete response:', res.status);
           if (res.ok) location.reload();
           else alert('Delete failed');
         } catch (err) {
-          console.error('Delete error:', err);
           alert('Error: ' + err.message);
         }
       }
@@ -34,15 +30,13 @@ html(lang="en")
           const data = Object.fromEntries(new FormData(editForm));
           try {
             const res = await fetch('/members/' + id, {
-              method: 'PATCH',
+              method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(data)
             });
-            console.log('Edit response:', res.status);
             if (res.ok) location.href = '/members';
             else alert('Edit failed');
           } catch (err) {
-            console.error('Edit error:', err);
             alert('Error: ' + err.message);
           }
         };

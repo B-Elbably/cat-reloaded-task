@@ -136,3 +136,46 @@ form button[type='submit'] {
     color: #777;
     text-decoration: none;
 }
+
+/* Add Form */
+.add-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+.add-form input,
+.add-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: auto;
+}
+.add-form input[type="text"],
+.add-form input[type="email"] {
+    flex: 1;
+    min-width: 150px;
+}
+.add-form button {
+    padding: 8px 16px;
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+h2 {
+    margin: 20px 0 10px;
+    font-size: 1.2rem;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
