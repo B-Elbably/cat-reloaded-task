@@ -1,0 +1,43 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    nav
+      a(href="/members") Members Dashboard
+    .container
+      block content
+    script.
+      async function deleteMember(btn) {
+        if (!confirm('Delete this member?')) return;
+        const id = btn.dataset.id;
+        try {
+          const res = await fetch('/members/' + id, { method: 'DELETE' });
+          if (res.ok) location.reload();
+          else alert('Delete failed');
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+      const editForm = document.getElementById('editForm');
+      if (editForm) {
+        editForm.onsubmit = async (e) => {
+          e.preventDefault();
+          const id = editForm.dataset.id;
+          const data = Object.fromEntries(new FormData(editForm));
+          try {
+            const res = await fetch('/members/' + id, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            if (res.ok) location.href = '/members';
+            else alert('Edit failed');
+          } catch (err) {
+            alert('Error: ' + err.message);
+          }
+        };
+      }
