@@ -1,5 +1,5 @@
-const express = require('express');
-const membersControllers = require('../controllers/members.controller');
+import express from 'express';
+import * as membersControllers from '../controllers/members.controller.js';
 
 const router = express.Router();
 
@@ -14,4 +14,5 @@ router
     .route('/:id')
     .put(membersControllers.updateMember)
     .delete(membersControllers.deleteMember);
-module.exports = router;
+
+export default router;
